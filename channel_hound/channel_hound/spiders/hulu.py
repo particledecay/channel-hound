@@ -12,7 +12,8 @@ class HuluSpider(scrapy.Spider):
 
     def parse(self, response):
         network_list = response.xpath('//div[@id="channels"]/following-sibling::div//div[@class="network-list"]/img')
-        package = {'service': HuluSpider.service, 'name': 'Base', 'price': '44.99'}
+        package = {'service': HuluSpider.service, 'name': 'Base'}
+        package['price'] = response.xpath('//div[contains(@class, "plan-card__priceline")]/h4/text()[contains(., ".")]').extract()[0].strip()
         for channel in network_list:
             name = channel.xpath('./@alt').extract()[0]
             yield ChannelItem(name=name, package=package)
