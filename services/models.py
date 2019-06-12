@@ -12,7 +12,7 @@ class Package(models.Model):
     name = models.CharField(max_length=100, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=6)
 
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='packages')
 
     class Meta:
         unique_together = ['name', 'service']
