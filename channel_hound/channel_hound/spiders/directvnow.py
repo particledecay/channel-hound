@@ -10,6 +10,7 @@ class DirectvnowSpider(scrapy.Spider):
     start_urls = [
         'https://cdn.directv.com/content/dam/dtv/prod/website_directvnow/modals/compare-packages-dbs.html'
     ]
+    service = 'DIRECTV NOW'
 
     def parse(self, response):
         packages = self.get_packages(response)
@@ -22,7 +23,7 @@ class DirectvnowSpider(scrapy.Spider):
         packages = []
 
         for package_element in package_elements:
-            package = dict(service='DIRECTV NOW')
+            package = {'service': DirectvnowSpider.service}
             package['name'] = package_element.xpath('.//div[@class="title"]//text()').extract()[0]
             package['price'] = package_element.xpath('.//div[@class="price"]//text()').extract()[0]
             packages.append(package)

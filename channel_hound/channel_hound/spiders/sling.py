@@ -17,6 +17,7 @@ class SlingSpider(scrapy.Spider):
         'sling-mss': 'SLING BLUE',
         'sling-combo': 'ORANGE & BLUE',
     }
+    service = 'Sling'
 
     def __init__(self, *args, **kwargs):
         self.regex_package = re.compile(r'PackageId=([^\.]+)')
@@ -49,7 +50,7 @@ class SlingSpider(scrapy.Spider):
         package_id = matched_package.groups()[0]
         package_name = SlingSpider.translated_package_names[package_id]
 
-        package = {'service': 'Sling', 'name': package_name}
+        package = {'service': SlingSpider.service, 'name': package_name}
         package['price'] = response.meta['package_prices'][self.translated_package_names[package_id]]
 
         for channel in jsonresponse:

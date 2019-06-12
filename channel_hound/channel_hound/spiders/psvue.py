@@ -12,12 +12,13 @@ class PsvueSpider(scrapy.Spider):
     start_urls = [
         'https://vue.api.playstation.com/v1/channels/channelEntitlement?imageType=medium&zipCode=33076',
     ]
+    service = 'Playstation Vue'
 
     def parse(self, response):
         jsonresponse = json.loads(response.body_as_unicode())
 
         for package_obj in jsonresponse['subscriptions']:
-            package = {'service': 'Playstation Vue', 'name': package_obj['entitlementName'],
+            package = {'service': PsvueSpider.service, 'name': package_obj['entitlementName'],
                        'price': package_obj['regularPrice']}
             for channel in package_obj['channels']:
                 yield ChannelItem(name=channel['name'], package=package)
