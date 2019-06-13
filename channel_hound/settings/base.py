@@ -131,5 +131,6 @@ SPIDER_MODULES = ['channel_hound.spiders']
 NEWSPIDER_MODULE = 'channel_hound.spiders'
 ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
+    'channel_hound.pipelines.TranslationPipeline': 100,
     'channel_hound.pipelines.DatabasePipeline': 300,
 }

@@ -14,6 +14,21 @@ from scrapy.exporters import JsonItemExporter
 from services.models import Channel, Package, Service
 
 
+class TranslationPipeline(object):
+
+    def __init__(self):
+        self._translator = {
+            'GOLF NETWORK': 'Golf Channel',
+        }
+
+    def translate_name(self, name):
+        return self._translator.get(name.upper(), name)
+
+    def process_item(self, item, spider):
+        item['name'] = self.translate_name(item['name'])
+        return item
+
+
 class JsonPipeline(object):
 
     def __init__(self):
