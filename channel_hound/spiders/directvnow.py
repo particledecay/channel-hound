@@ -44,5 +44,5 @@ class DirectvnowSpider(scrapy.Spider):
 
     def get_channel_title(self, channel_element):
         title_elements = channel_element.xpath('.//div[contains(@class, "ch--title")]//text()').extract()
-        stripped_titles =  filter(lambda title: title, map(lambda txt: txt.strip(), title_elements))
+        stripped_titles =  filter(lambda title: title.replace('*', ''), map(lambda txt: txt.strip(), title_elements))
         return ''.join(stripped_titles)
