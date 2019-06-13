@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -14,11 +15,16 @@ class Package(models.Model):
 
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='packages')
 
-    class Meta:
-        unique_together = ['name', 'service']
-
     def __str__(self):
         return ' '.join(filter(lambda x: x, [self.service.name, self.name]))
+
+    def validate_unique(self, exclude=None):
+        """Performs a "unique together" check across the 'service' ForeignKey."""
+        super().validate_unique(exclude=exclude)
+        qs = Package.objects.filter(name=self.name)
+        if qs.filter(service__name=self.service.name).exists():
+            raise ValidationError({'name': ['Package must be unique per service']})
+
 
 
 class Channel(models.Model):
