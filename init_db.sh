@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # BEGIN EDITABLE VALUES
-PG_USER=postgres
-PG_HOST=localhost
-PG_PORT=5432
+PG_USER=${PG_USER:=postgres}
+PG_HOST=${PG_HOST:=localhost}
+PG_PORT=${PG_PORT:=5432}
+PG_PASS=${PG_PASS:=houndH0uNd}
 # END EDITABLE VALUES
 
 docker_wrap=false
@@ -31,11 +32,8 @@ else
   cmd="psql -U ${PG_USER} -h ${PG_HOST} -p ${PG_PORT} -c"
 fi
 
-# install extension
-${cmd} "CREATE EXTENSION pg_trgm"
-
 # create user
-${cmd} "CREATE ROLE houndadmin WITH PASSWORD '${PG_PASS:-houndH0uNd}'"
+${cmd} "CREATE ROLE houndadmin WITH PASSWORD '${PG_PASS}'"
 ${cmd} "ALTER ROLE houndadmin WITH LOGIN"
 
 # create database
