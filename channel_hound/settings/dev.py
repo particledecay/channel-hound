@@ -1,0 +1,1 @@
+ITEM_PIPELINES['channel_hound.pipelines.JsonPipeline'] = 200
