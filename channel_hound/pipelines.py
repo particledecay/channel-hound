@@ -40,7 +40,8 @@ class DatabasePipeline(object):
             svc = Service(name=item['package']['service'])
             svc.save()
 
-        existing_pkg = Package.objects.filter(name__iexact=item['package']['name'])
+        existing_pkg = Package.objects.filter(name__iexact=item['package']['name'],
+                                              service=svc)
         if existing_pkg:
             pkg = existing_pkg[0]
         else:
