@@ -18,7 +18,7 @@ class Package(models.Model):
         unique_together = ['name', 'service']
 
     def __str__(self):
-        return self.name or self.service.name
+        return ' '.join(filter(lambda x: x, [self.service.name, self.name]))
 
 
 class Channel(models.Model):
