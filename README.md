@@ -7,12 +7,13 @@ This project scrapes data from all the major channel-based streaming services to
 The goal is to let you always have an updated look at which streaming services have the channels you really want, at the best price.
 
 ## Live application
-This project is not currently live anywhere (coming soon). But you can run it locally!
+This project is not currently live anywhere. But you can run it locally!
 
 ## Setup
 ### Requirements
 - Database (PostgreSQL)
 - Python 3.6+
+- [Poetry](https://python-poetry.org/)
 
 ### Database init script
 If you have a postgres installation, you can run the `init_db.sh` script on the running server to create the necessary user and database. The following variables can be set to your preference:
@@ -45,3 +46,6 @@ This will automatically retrieve any channels and packages for that service and 
 - Playstation Vue
 - Hulu w/ Live TV
 - Philo
+
+## Contributing
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
