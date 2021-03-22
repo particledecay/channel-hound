@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "channel-hound"
+version = "0.1.0"
+description = "A comparison tool for channel-based streaming services"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Django = "^2.2"
+lxml = "^4.6"
+Scrapy = "^1.6"
+psycopg2 = "^2.8"
+django-extensions = "^2.1"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
